@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accueil - Groupe des 5</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    header {
+      background-image: url('./../photos/trois.jpeg');
+      background-size: cover;
+      background-position: top center;
+      height: 200vh;
+      color: white;
+      position: relative;
+      filter: brightness(75%);
+    }
+    .overlay {
+      background: rgba(4, 6, 34, 0.5);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .header-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .slogans-section {
+      padding: 60px 20px;
+      background-color: #f8f9fa;
+      text-align: center;
+    }
+    .slogans-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #343a40;
+    }
+    .slogans-section .slogan {
+      font-size: 1.5rem;
+      margin: 20px auto;
+      max-width: 800px;
+      font-style: italic;
+      color: #555;
+    }
+
+    .photo-section {
+      background-image: url('https://source.unsplash.com/1600x600/?success,achievement');
+      background-size: cover;
+      background-position: top;
+      height: 80vh;
+    }
+    .realizations-section {
+      padding: 60px 20px;
+      background-color: #f1f1f1;
+    }
+    .realizations-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+    .realizations-carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    .realizations-card {
+      flex: 0 0 auto;
+      width: 300px;
+      border: none;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      scroll-snap-align: center;
+    }
+    .realizations-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .realizations-card img {
+      border-radius: 8px 8px 0 0;
+      object-fit: cover;
+      height: 200px;
+      width: 100%;
+    }
+    .realizations-card-body {
+      padding: 20px;
+      text-align: center;
+    }
+    .realizations-card-body h5 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+    .realizations-card-body p {
+      color: #777;
+      margin-bottom: 20px;
+    }
+    .realizations-card-body .btn {
+      background-color: #28a745;
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+      border-radius: 20px;
+      padding: 10px 20px;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    .realizations-card-body .btn:hover {
+      background-color: #218838;
+    }
+    .pagination-section {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .realizations-carousel::-webkit-scrollbar {
+      height: 10px;
+    }
+    .realizations-carousel::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+    .realizations-carousel::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    @media (max-width: 992px) {
+      .nav-arrow {
+        display: inline-block;
+      }
+    }
+    @media (min-width: 993px) {
+      .nav-arrow {
+        display: none;
+      }
+    }
+
+    .team-section {
+      padding: 60px 20px;
+      background-color: #fff;
+    }
+    .team-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+    .team-member {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .team-member img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #28a745;
+      margin-bottom: 20px;
+    }
+    .team-member h5 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+    .team-member p {
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .team-member .role {
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .skills-section {
+      background-color: #f9f9f9;
+      padding: 60px 20px;
+    }
+    .skills-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+    }
+    .skill-item {
+      margin-bottom: 25px;
+    }
+    .skill-label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .progress {
+      height: 25px;
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      background-color: #28a745;
+      line-height: 25px;
+      font-weight: bold;
+    }
+    
+    .contact-section {
+        padding: 60px 0;
+        background-color: #f8f9fa;
+      }
+
+      .contact-form {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-control {
+        border: none;
+        border-bottom: 2px solid #28a745; /* Vert */
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 1px 0 0 #28a745;
+      }
+
+      .contact-section {
+        padding: 60px 0;
+        background-color: #f8f9fa;
+      }
+
+      .contact-form {
+        background: #fff;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+
+
+    footer {
+      background-color: #212529;
+      color: white;
+      padding: 40px 0;
+    }
+
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Groupe des 5</a>
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">À propos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Projets</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <div class="overlay"></div>
+    <div class="header-content">
+      <h1 class="display-4">Bienvenue sur notre site</h1>
+      <p class="lead">Unis pour réussir – Découvrez notre groupe</p>
+      <div class="mt-4">
+        <a href="#" class="text-white fs-3 mx-2"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-white fs-3 mx-2"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-white fs-3 mx-2"><i class="bi bi-linkedin"></i></a>
+        <a href="#" class="text-white fs-3 mx-2"><i class="bi bi-github"></i></a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Slogans Section -->
+  <section class="slogans-section">
+    <h2>Nos Slogans</h2>
+    <p class="slogan">"Ensemble, on va plus loin."</p>
+    <p class="slogan">"L’union fait la force, la persévérance fait le succès."</p>
+    <p class="slogan">"Cinq esprits, une seule vision."</p>
+    <p class="slogan">"On ne rêve pas seul, on construit ensemble."</p>
+  </section>
+
+
+  <!-- Nos Réalisations Section -->
+  <section class="realizations-section">
+    <h2 class="realizations-title">Nos Réalisations</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <button class="btn btn-outline-dark nav-arrow" onclick="scrollCarousel(-1)">&lt;</button>
+      <button class="btn btn-outline-dark nav-arrow" onclick="scrollCarousel(1)">&gt;</button>
+    </div>
+    <div class="realizations-carousel" id="realizations-carousel">
+      <!-- Génération de 10 réalisations -->
+      <!-- Répéter les blocs ci-dessous avec différents titres et images -->
+
+      <script>
+        const carousel = document.getElementById('realizations-carousel');
+        const cards = [
+          "Projet A", "Projet B", "Projet C", "Projet D", "Projet E",
+          "Projet F", "Projet G", "Projet H", "Projet I", "Projet J"
+        ];
+        for (let i = 0; i < cards.length; i++) {
+          const card = document.createElement('div');
+          card.className = 'card realizations-card';
+          card.innerHTML = `
+            <img src="https://source.unsplash.com/300x200/?project,${i}" class="card-img-top" alt="Realisation ${i+1}">
+            <div class="card-body realizations-card-body">
+              <h5 class="card-title">${cards[i]}</h5>
+              <p class="card-text">Briefing du ${cards[i]} avec quelques lignes d'explication rapide.</p>
+              <a href="#" class="btn">Lire plus</a>
+            </div>
+          `;
+          carousel.appendChild(card);
+        }
+
+        // Scroll automatique
+        let scrollIndex = 0;
+        setInterval(() => {
+          scrollIndex++;
+          if (scrollIndex >= cards.length) scrollIndex = 0;
+          carousel.scrollTo({ left: scrollIndex * 320, behavior: 'smooth' });
+        }, 3000);
+
+        // Contrôle via flèches
+        function scrollCarousel(direction) {
+          const currentScroll = carousel.scrollLeft;
+          carousel.scrollTo({ left: currentScroll + direction * 320, behavior: 'smooth' });
+        }
+      </script>
+    </div>
+  </section>
+
+
+  <section class="team-section">
+    <h2 class="team-title">Notre Équipe</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-4 team-member">
+        <img src="./../photos/bro-roda.jpg" alt="sofie">
+        <h5>Rodrigue Linjanja</h5>
+        <p>Passionné par l’innovation, Jean développe des projets techniques pour améliorer la vie quotidienne.</p>
+        <p><strong>Réalisations :</strong> Création de l’application mobile du groupe, Organisation des meetups tech.</p>
+        <p class="role">Rôle : Chef de Projet</p>
+      </div>
+      <div class="col-md-4 team-member">
+        <img src="./../photos/bro-chris.jpg" alt="lingwala">
+        <h5>Christian Civiri</h5> 
+        <p>Créative et méthodique, Sophie s’occupe du design et de la communication du groupe.</p>
+        <p><strong>Réalisations :</strong> Conception des affiches, Gestion du compte Instagram du groupe.</p>
+        <p class="role">Rôle : Responsable Communication</p>
+      </div>
+      <div class="col-md-4 team-member">
+        <img src="./../photos/bro-roda.jpg" alt="sofie">
+        <h5>Rodrigue Linjanja</h5>
+        <p>Passionné par l’innovation, Jean développe des projets techniques pour améliorer la vie quotidienne.</p>
+        <p><strong>Réalisations :</strong> Création de l’application mobile du groupe, Organisation des meetups tech.</p>
+        <p class="role">Rôle : Chef de Projet</p>
+      </div>
+      <div class="col-md-4 team-member">
+        <img src="./../photos/gizzo.jpg" alt="lingwala">
+        <h5>Gizo Kalume</h5> 
+        <p>Créative et méthodique, Sophie s’occupe du design et de la communication du groupe.</p>
+        <p><strong>Réalisations :</strong> Conception des affiches, Gestion du compte Instagram du groupe.</p>
+        <p class="role">Rôle : Responsable Communication</p>
+      </div>
+      <div class="col-md-4 team-member">
+        <img src="./../photos/bro-chris.jpg" alt="lingwala">
+        <h5>Christian Civiri</h5> 
+        <p>Créative et méthodique, Sophie s’occupe du design et de la communication du groupe.</p>
+        <p><strong>Réalisations :</strong> Conception des affiches, Gestion du compte Instagram du groupe.</p>
+        <p class="role">Rôle : Responsable Communication</p>
+      </div>
+      <div class="col-md-4 team-member">
+        <img src="./../photos/bro-roda.jpg" alt="sofie">
+        <h5>Rodrigue Linjanja</h5>
+        <p>Passionné par l’innovation, Jean développe des projets techniques pour améliorer la vie quotidienne.</p>
+        <p><strong>Réalisations :</strong> Création de l’application mobile du groupe, Organisation des meetups tech.</p>
+        <p class="role">Rôle : Chef de Projet</p>
+      </div>
+      <div class="col-md-4 team-member">
+        <img src="./../photos/gizzo.jpg" alt="lingwala">
+        <h5>Gisele kalume</h5> 
+        <p>Créative et méthodique, Sophie s’occupe du design et de la communication du groupe.</p>
+        <p><strong>Réalisations :</strong> Conception des affiches, Gestion du compte Instagram du groupe.</p>
+        <p class="role">Rôle : Responsable Communication</p>
+      </div>
+      <!-- Ajoute d'autres membres ici si besoin -->
+    </div>
+  </section>
+
+  <section class="skills-section">
+    <h2 class="skills-title">Nos Compétences</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 skill-item">
+          <div class="skill-label">Développement Web</div>
+          <div class="progress">
+            <div class="progress-bar" style="width: 95%;">95%</div>
+          </div>
+        </div>
+        <div class="col-md-6 skill-item">
+          <div class="skill-label">Design Graphique</div>
+          <div class="progress">
+            <div class="progress-bar" style="width: 85%;">85%</div>
+          </div>
+        </div>
+        <div class="col-md-6 skill-item">
+          <div class="skill-label">Réseaux Informatiques</div>
+          <div class="progress">
+            <div class="progress-bar" style="width: 80%;">80%</div>
+          </div>
+        </div>
+        <div class="col-md-6 skill-item">
+          <div class="skill-label">Communication</div>
+          <div class="progress">
+            <div class="progress-bar" style="width: 90%;">90%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="contact-section">
+    <div class="container">
+      <h2 class="text-center mb-5">Contactez-nous</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/myzwyvze"
+            method="POST"
+          >
+            <div class="mb-3">
+              <label for="name" class="form-label">Nom</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Votre nom"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Votre email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea
+                class="form-control"
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Votre message"
+                required
+              ></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-success px-5">Envoyer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <!-- Colonne A propos -->
+      <div class="col-md-4">
+        <h5>À propos</h5>
+        <p>Le Groupe des 5 est une équipe passionnée par l'innovation, la technologie et le développement communautaire. Nous croyons que l'union fait la force.</p>
+      </div>
+
+      <!-- Colonne Liens rapides -->
+      <div class="col-md-4">
+        <h5>Liens rapides</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Accueil</a></li>
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Nos projets</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Colonne Contact -->
+      <div class="col-md-4">
+        <h5>Contact</h5>
+        <p><i class="bi bi-geo-alt"></i> Bukavu, RDC</p>
+        <p><i class="bi bi-envelope"></i> groupe5@email.com</p>
+        <p><i class="bi bi-telephone"></i> +243 999 000 000</p>
+        <div class="mt-3">
+          <a href="#" class="text-white me-2"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="#" class="text-white me-2"><i class="bi bi-instagram fs-4"></i></a>
+          <a href="#" class="text-white me-2"><i class="bi bi-linkedin fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-github fs-4"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bas de page -->
+    <div class="footer-bottom mt-4">
+      <p class="mb-0">&copy; 2025 Groupe des 5. Tous droits réservés. | Développé avec ❤️ à Bukavu</p>
+    </div>
+  </div>
+</footer>
+
+</html>
